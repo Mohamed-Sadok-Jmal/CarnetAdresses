@@ -24,7 +24,7 @@ class ContactController extends Controller
       throw new NotFoundHttpException('Page "'.$page.'" inexistante.');
     }
 
-    // Ici je fixe le nombre d'annonces par page à 3
+    // Ici on fixe le nombre de contacts par page à 3
     // Mais bien sûr il faudrait utiliser un paramètre, et y accéder via $this->container->getParameter('nb_per_page')
     $nbPerPage = 3;
 
@@ -33,7 +33,7 @@ class ContactController extends Controller
     	->getRepository('AppartooPlatformBundle:Contact')
     	->getContacts($page, $nbPerPage, $this->getUser()->getId());
 
-    // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
+    // On calcule le nombre total de pages grâce au count($listContacts) qui retourne le nombre total de contacts
     $nbPages = ceil(count($listContacts) / $nbPerPage);
 
     // Si la page n'existe pas, on retourne une 404
@@ -53,7 +53,7 @@ class ContactController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
 
-    // Pour récupérer une seule annonce, on utilise la méthode find($id)
+    // Pour récupérer un seul contact, on utilise la méthode find($id)
     $contact = $em->getRepository('AppartooPlatformBundle:Contact')->find($id);
 
     if (null === $contact) {
@@ -84,20 +84,18 @@ class ContactController extends Controller
     // Si la requête est en POST
     if ($request->isMethod('POST')) {
       // On fait le lien Requête <-> Formulaire
-      // À partir de maintenant, la variable $advert contient les valeurs entrées dans le formulaire par le visiteur
       $form->handleRequest($request);
 
       // On vérifie que les valeurs entrées sont correctes
-      // (Nous verrons la validation des objets en détail dans le prochain chapitre)
       if ($form->isValid()) {
-        // On enregistre notre objet $advert dans la base de données, par exemple
+        // On enregistre notre objet $contact dans la base de données
         $em = $this->getDoctrine()->getManager();
         $em->persist($contact);
         $em->flush();
 
         $request->getSession()->getFlashBag()->add('notice', 'Contact bien enregistré.');
 
-        // On redirige vers la page de visualisation de l'annonce nouvellement créée
+        // On redirige vers la page de visualisation du contact nouvellement créé
         return $this->redirectToRoute('appartoo_platform_view', array('id' => $contact->getId()));
       }
     }
@@ -123,7 +121,7 @@ class ContactController extends Controller
     $form = $this->get('form.factory')->create(ContactEditType::class, $contact);
 
     if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-      // Inutile de persister ici, Doctrine connait déjà notre annonce
+      // Inutile de persister ici, Doctrine connait déjà notre contact
       $em->flush();
 
       $request->getSession()->getFlashBag()->add('notice', 'Contact bien modifié.');
@@ -147,8 +145,6 @@ class ContactController extends Controller
       throw new NotFoundHttpException("Le contact d'id ".$id." n'existe pas.");
     }
 
-    // On crée un formulaire vide, qui ne contiendra que le champ CSRF
-    // Cela permet de protéger la suppression d'annonce contre cette faille
     $form = $this->get('form.factory')->create();
 
     if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
@@ -173,7 +169,7 @@ class ContactController extends Controller
 
     $listContacts = $em->getRepository('AppartooPlatformBundle:Contact')->findBy(
       array('user' => $this->getUser()->getId()),                 // Pas de critère
-      array('id' => 'desc'), // On trie par id décroissante
+      array('id' => 'desc'), // On trie par id décroissante puisqu'il n'y a pas de date
       $limit,                  // On sélectionne $limit annonces
       0                        // À partir du premier
     );
