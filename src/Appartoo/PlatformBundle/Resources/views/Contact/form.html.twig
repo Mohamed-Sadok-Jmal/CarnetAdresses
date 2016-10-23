@@ -1,0 +1,58 @@
+{# src/Appartoo/PlatformBundle/Resources/views/Contact/form.html.twig #}
+
+<div class="well">
+  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+  {# Les erreurs générales du formulaire. #}
+  {{ form_errors(form) }}
+
+  {# Génération manuelle et éclatée : #}
+  <div class="form-group">
+    {# Génération du label. #}
+    {{ form_label(form.email, "Email", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    {{ form_errors(form.email) }}
+
+    <div class="col-sm-10">
+      {# Génération de l'input. #}
+      {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
+
+  {# champ address #}
+  <div class="form-group">
+    {{ form_label(form.address, "Adresse", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    {{ form_errors(form.address) }}
+    <div class="col-sm-10">
+      {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
+
+  {# champ phone #}
+  <div class="form-group">
+    {{ form_label(form.phone, "Tel", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    {{ form_errors(form.phone) }}
+    <div class="col-sm-10">
+      {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
+
+  {# champ website #}
+  <div class="form-group">
+    {{ form_label(form.website, "Site Web", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    {{ form_errors(form.website) }}
+    <div class="col-sm-10">
+      {{ form_widget(form.website, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
+
+  {# Génération automatique des champs pas encore écrits. #}
+  {{ form_rest(form) }}
+
+  {# le bouton save #}
+  {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+
+  {# Fermeture de la balise <form> du formulaire HTML #}
+  {{ form_end(form) }}
+</div>

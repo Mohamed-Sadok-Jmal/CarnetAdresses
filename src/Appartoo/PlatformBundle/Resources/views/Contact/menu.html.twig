@@ -1,0 +1,14 @@
+{# src/Appartoo/PlatformBundle/Resources/views/Contact/menu.html.twig #}
+
+{# Ce template n'hérite de personne,
+   tout comme le template inclus avec {{ include() }}. #}
+
+<ul class="nav nav-pills nav-stacked">
+  {% for contact in listContacts %}
+    <li>
+      <a href="{{ path('appartoo_platform_view', {'id': contact.id}) }}">
+        {{ contact.email }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>

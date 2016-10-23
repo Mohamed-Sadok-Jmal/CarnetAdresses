@@ -1,0 +1,7 @@
+appartoo_platform:
+    resource: "@AppartooPlatformBundle/Resources/config/routing.yml"
+    prefix: /platform
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+

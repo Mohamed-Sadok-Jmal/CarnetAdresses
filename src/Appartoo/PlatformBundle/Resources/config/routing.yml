@@ -1,0 +1,35 @@
+# src/Appartoo/PlatformBundle/Resources/config/routing.yml
+
+appartoo_platform_home:
+    path:      /{page}
+    defaults:
+        _controller: AppartooPlatformBundle:Contact:index
+        page: 1
+    requirements:
+        page: \d*
+    
+appartoo_platform_view:
+    path:      /contact/{id}
+    defaults:
+        _controller: AppartooPlatformBundle:Contact:view
+    requirements:
+        id: \d+
+
+appartoo_platform_add:
+    path: /add
+    defaults:
+        _controller: AppartooPlatformBundle:Contact:add
+
+appartoo_platform_edit:
+    path:      /edit/{id}
+    defaults:
+        _controller: AppartooPlatformBundle:Contact:edit
+    requirements:
+        id: \d+
+
+appartoo_platform_delete:
+    path: /delete/{id}
+    defaults:
+        _controller: AppartooPlatformBundle:Contact:delete
+    requirements:
+        id: \d+

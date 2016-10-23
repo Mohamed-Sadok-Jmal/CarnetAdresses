@@ -1,0 +1,14 @@
+# src/Appartoo/PlatformBundle/Resources/config/services.yml
+
+services:
+    appartoo_platform.email.application_mailer:
+        class: Appartoo\PlatformBundle\Email\ApplicationMailer
+        arguments:
+            - "@mailer"
+
+    appartoo_platform.doctrine_listener.application_creation:
+        class: Appartoo\PlatformBundle\DoctrineListener\ApplicationCreationListener
+        arguments:
+            - "@appartoo_platform.email.application_mailer"
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }

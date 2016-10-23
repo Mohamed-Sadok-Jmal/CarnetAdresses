@@ -1,0 +1,23 @@
+{# src/Appartoo/PlatformBundle/Resources/views/Contact/edit.html.twig #}
+
+{% extends "AppartooPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+  Modifier un contact - {{ parent() }}
+{% endblock %}
+
+{% block appartooplatform_body %}
+
+  <h2>Modifier un contact</h2>
+
+  {{ include("AppartooPlatformBundle:Contact:form.html.twig") }}
+
+
+  <p>
+    <a href="{{ path('appartoo_platform_view', {'id': contact.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour au contact
+    </a>
+  </p>
+
+{% endblock %}

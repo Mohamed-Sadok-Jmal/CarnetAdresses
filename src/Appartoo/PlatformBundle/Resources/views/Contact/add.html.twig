@@ -1,0 +1,25 @@
+{# src/Appartoo/PlatformBundle/Resources/views/Contact/add.html.twig #}
+
+{% extends "AppartooPlatformBundle::layout.html.twig" %}
+
+{% block body %}
+
+<p class="bottom-btns">
+    <a href="{{ path('appartoo_platform_home') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à la liste
+    </a>
+</p>
+
+  <h2>Ajouter un contact</h2>
+
+  {{ include("AppartooPlatformBundle:Contact:form.html.twig") }}
+
+  <p class="bottom-btns">
+    <a href="{{ path('appartoo_platform_home') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à la liste
+    </a>
+</p>
+
+{% endblock %}

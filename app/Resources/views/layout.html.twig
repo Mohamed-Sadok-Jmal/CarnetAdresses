@@ -1,0 +1,84 @@
+{# app/Resources/views/layout.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% block title %}Appartoo Plateforme{% endblock %}</title>
+
+  {% block stylesheets %}
+    {# On charge le CSS de bootstrap depuis le site directement #}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('bundles/appartooplatform/css/main.css') }}" type="text/css" />
+  {% endblock %}
+</head>
+
+<body>
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="{{ path('appartoo_platform_home') }}" class="logo">
+      <span class="logo-lg"><b>Appart</b>OO</span>
+    </a>
+    <nav class="navbar navbar-static-top">
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs">{{app.user.username}}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" class="img-circle" alt="User Image">
+
+                <p>
+                  {{ app.user.username }} - {{app.user.email}}
+                </p>
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default btn-profile">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-profile">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="row">
+      <div id="menu" class="col-md-3">
+        <h4>Derniers contacts ajoutés</h4>
+        {{ render(controller("AppartooPlatformBundle:Contact:menu", {'limit': 3})) }}
+      </div>
+      <div id="content" class="col-md-9">
+        {% block body %}
+        {% endblock %}
+      </div>
+    </div>
+
+    <hr>
+    <footer>
+      <strong>Copyright © 2015-2016 <a href="http://www.appartoo.com/en/">{{webmaster}}</a>.</strong> All rights
+    reserved.
+    </footer>
+  </div>
+
+  {% block javascripts %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+{# src/Appartoo/PlatformBundle/Resources/views/Contact/index.html.twig #}
+
+{% extends "AppartooPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+  Accueil - {{ parent() }}
+{% endblock %}
+
+{% block appartooplatform_body %}
+  <h2>Contact list</h2>
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th></th>
+                  <th>Email</th>
+                  <th>Adresse</th>
+                  <th>Tel</th>
+                  <th>Website</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for contact in listContacts %}
+                <tr>
+                  <td class="table-col-img"><a href="{{ path('appartoo_platform_view', {'id': contact.id}) }}"><img src="{{contact.image.url}}" alt="{{contact.image.alt}}" class="user-image"></a></td>
+                  <td><a href="{{ path('appartoo_platform_view', {'id': contact.id}) }}">
+          {{ contact.email }}</a>
+                  </td>
+                  <td>{{ contact.address }}</td>
+                  <td>{{ contact.phone }}</td>
+                  <td>{{ contact.website }}</td>
+                </tr>
+    {% else %}
+      <tr><td></td><td></td><td></td><td></td><td></td></tr>
+    {% endfor %}
+                </tbody>
+              </table>
+          </div>
+
+  <ul class="pagination">
+  {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
+  {% for p in range(1, nbPages) %}
+    <li{% if p == page %} class="active"{% endif %}>
+      <a href="{{ path('appartoo_platform_home', {'page': p}) }}">{{ p }}</a>
+    </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

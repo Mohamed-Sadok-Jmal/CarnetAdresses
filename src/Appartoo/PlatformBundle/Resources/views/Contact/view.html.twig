@@ -1,0 +1,34 @@
+{# src/Appartoo/PlatformBundle/Resources/views/Contact/index.html.twig #}
+
+{% extends "AppartooPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+  Lecture d'une annonce - {{ parent() }}
+{% endblock %}
+
+{% block appartooplatform_body %}
+
+  <div class="detail"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><strong>{{ contact.email }}</strong></div>
+
+  <div class="detail"><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i><strong>{{ contact.address }}</strong></div>
+  
+  <div class="detail"><i class="glyphicon glyphicon-phone" aria-hidden="true"></i><strong>{{ contact.phone }}</strong></div>
+
+  <div class="detail"><i class="glyphicon glyphicon-globe" aria-hidden="true"></i><strong>{{ contact.website }}</strong></div>
+
+  <p class="bottom-btns">
+    <a href="{{ path('appartoo_platform_home') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à la liste
+    </a>
+    <a href="{{ path('appartoo_platform_edit', {'id': contact.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+      Modifier le contact
+    </a>
+    <a href="{{ path('appartoo_platform_delete', {'id': contact.id}) }}" class="btn btn-danger">
+      <i class="glyphicon glyphicon-trash"></i>
+      Supprimer le contact
+    </a>
+  </p>
+
+{% endblock %}

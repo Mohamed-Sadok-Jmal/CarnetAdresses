@@ -1,0 +1,27 @@
+{# src/Appartoo/PlatformBundle/Resources/views/Contact/delete.html.twig #}
+
+{% extends "AppartooPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+  Supprimer le contact - {{ parent() }}
+{% endblock %}
+
+{% block appartooplatform_body %}
+
+  <h2>Supprimer un contact</h2>
+
+  <p>
+    Etes-vous certain de vouloir supprimer le contact "{{ contact.email }}" ?
+  </p>
+
+  <form action="{{ path('appartoo_platform_delete', {'id': contact.id}) }}" method="post">
+    <a href="{{ path('appartoo_platform_view', {'id': contact.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour au contact
+    </a>
+    
+    <input type="submit" value="Supprimer" class="btn btn-danger" />
+    {{ form_rest(form) }}
+  </form>
+
+{% endblock %}
